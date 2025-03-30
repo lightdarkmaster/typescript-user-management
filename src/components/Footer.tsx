@@ -1,7 +1,9 @@
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <div className="w-full h-fit bg-red-600">
+<h1>Footer</h1>
+    </div>
   )
 }
 
