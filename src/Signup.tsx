@@ -3,9 +3,9 @@ import { FaRegUser } from "react-icons/fa";
 import { LuLockKeyhole } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Properties } from "./Types";
 
-function Signup() {
-  // State variables with correct typing
+const Signup: React.FC<Properties> =()=> {
   const [username, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [users, setUsers] = useState<{ username: string; password: string }[]>([]);
@@ -28,6 +28,14 @@ function Signup() {
     });
   };
 
+  const modalForDuplicate=()=>{
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+      footer: '<a href="#">Why do I have this issue?</a>'
+    });
+  }
   const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
@@ -38,14 +46,19 @@ function Signup() {
 
     const newUser = { username, password };
     
-    // Add new user to the list correctly
+
     setUsers([...users, newUser]);
 
     console.log(users);
 
     registerModal();
-
-    // Clear input fields after submission
+    const found = users.find((users) => users.username === username);
+    if (found) {
+      modalForDuplicate();
+    } else {
+      registerModal();
+    }    
+    setUsers([...users, { username, password}]);
     setUserName("");
     setPassword("");
   };

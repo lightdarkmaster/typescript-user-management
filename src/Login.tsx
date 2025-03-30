@@ -1,10 +1,13 @@
 import { FaRegUser } from "react-icons/fa";
 import { LuLockKeyhole } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-function Login({user}) {
+import { Properties } from "./Types";
+
+
+const Login: React.FC<Properties> =({users})=> {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -36,21 +39,20 @@ function Login({user}) {
           theme: "dark"
       });
   }
-  const handleUsernameChange = (e) => {
+  const handleUsernameChange = (e: { target: { value: SetStateAction<string>; }; }) => {
       setUsername(e.target.value);
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: { target: { value: SetStateAction<string>; }; }) => {
       setPassword(e.target.value);
   };
 
 
-  const loginSubmit = (e) => {
+  const loginSubmit = (e: { preventDefault: () => void; }) => {
       e.preventDefault();
-      console.log("Username:", username);
-      console.log("Password:", password);
-      const found = user.some((user) => user.username === username && user.password === password);
-      console.log(found);
+      // console.log("Username:", username);
+      // console.log("Password:", password);
+      const found = users.find((user)=> user.username === username);
 
       if (found) {
           loginSuccessModal();
