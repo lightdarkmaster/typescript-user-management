@@ -4,8 +4,8 @@ import { LuLockKeyhole } from "react-icons/lu";
 
 function Login() {
   return (
-    <div className="w-full h-screen items-center justify-center gap-[10px] p-[10px] text-black place-content-center">
-      <div className="min-w-[400px] min-fit gap-[10px] p-[10px] bg-white shadow-md rounded-[10px] flex flex-col">
+    <div className="w-full h-screen items-center justify-center gap-[10px] p-[10px] text-black place-content-center flex">
+      <div className="w-fit min-fit gap-[10px] p-[10px] bg-white shadow-md rounded-[10px] flex flex-col">
         <div className="w-full h-fit justify-center items-center text-center">
           <h1 className="text-black text-[24px] poppins-bold">Sign In</h1>
         </div>
@@ -36,11 +36,11 @@ function Login() {
             </div>
 
             <div className="w-full h-full gap-[10px] p-[10px]">
-              <button className="w-full h-fit bg-[#78AEF5] text-white hover:bg-[#6383ad]">Sign In</button>
+              <button className="w-full h-fit bg-[#78AEF5] p-[10px] rounded-[10px] text-white hover:bg-[#6383ad]">Sign In</button>
             </div>
             <div className="text-center poppins-light gap-[10px] p-[10px]">
-              <h1>Already have an account? 
-                  <span className="text-blue-800 poppins-light cursor-pointer"> Sign In</span>
+              <h1>Don't have an account? 
+                  <span className="text-blue-800 poppins-light cursor-pointer"> Sign Up</span>
               </h1>
             </div>
           </form>
