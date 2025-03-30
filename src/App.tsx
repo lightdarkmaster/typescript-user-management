@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<LandingPage/>} />
           <Route path="/login" element={<Login users={users} setUsers={setUsers} />} />
           <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard users={users} setUsers={setUsers} />} />
         </Routes>
       </Router>
     </StrictMode>
