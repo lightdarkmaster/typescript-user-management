@@ -7,7 +7,7 @@ function Navbar() {
       <li className="cursor-pointer">Users</li>
     </ul>
   </div>
-  )
+  );
 }
 
 export default Navbar;
