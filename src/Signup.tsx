@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Properties } from "./Types";
 
-const Signup: React.FC<Properties> =()=> {
+const Signup: React.FC<Properties> =({users, setUsers})=> {
   const [username, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [users, setUsers] = useState<{ username: string; password: string }[]>([]);
 
   
   const emptyModal=()=>{
