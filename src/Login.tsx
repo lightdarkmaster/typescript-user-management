@@ -3,7 +3,7 @@ import { LuLockKeyhole } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, SetStateAction } from "react";
 import Swal from "sweetalert2";
-import { Properties } from "./Types";
+import { Properties } from "./types";
 
 const Login: React.FC<Properties> = ({ users }) => {
   const [username, setUsername] = useState("");
