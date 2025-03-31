@@ -2,6 +2,10 @@ import Navbar from "./components/Navbar";
 import { Properties } from "./types";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { IoAddCircleSharp } from "react-icons/io5";
+import { FaSearch } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
+import { MdDelete } from "react-icons/md";
 
 const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUsername] = useState("");
@@ -9,7 +13,9 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [editingUser, setEditingUser] = useState<string | null>(null);
-  const [showPasswords, setShowPasswords] = useState<{ [key: string]: boolean }>({});
+  const [showPasswords, setShowPasswords] = useState<{
+    [key: string]: boolean;
+  }>({});
   const [searchTerm, setSearchTerm] = useState("");
 
   const togglePasswordVisibility = (username: string) => {
@@ -21,12 +27,16 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
 
   const addUser = () => {
     if (!username || !password || !firstname || !lastname) {
-      Swal.fire("Error", "Please enter a username, password,firstname and lastname", "error");
+      Swal.fire(
+        "Error",
+        "Please enter a username, password,firstname and lastname",
+        "error"
+      );
       return;
     }
-    
+
     const found = users.find((user) => user.username === username);
-    
+
     if (found) {
       Swal.fire("Error", "Username already exists", "error");
     } else {
@@ -49,10 +59,14 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
       Swal.fire("Error", "Please enter a new username and password", "error");
       return;
     }
-    
-    setUsers(users.map((user) =>
-      user.username === editingUser ? { username, password, firstname, lastname } : user
-    ));
+
+    setUsers(
+      users.map((user) =>
+        user.username === editingUser
+          ? { username, password, firstname, lastname }
+          : user
+      )
+    );
     setEditingUser(null);
     setUsername("");
     setPassword("");
@@ -110,9 +124,9 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
             ) : (
               <button
                 onClick={addUser}
-                className="w-fit h-fit bg-green-500 text-white px-[50px] rounded hover:bg-green-600"
+                className="w-fit h-fit bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center justify-center"
               >
-                Add User
+                <IoAddCircleSharp className="w-5 h-5 bg" /> {}
               </button>
             )}
           </div>
@@ -124,18 +138,19 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="border p-2 rounded w-full mb-4"
             />
-              <button
-                onClick={() => setSearchTerm(searchTerm)}
-                className="w-fit h-fit bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Search
-              </button>
+            <button
+              onClick={() => setSearchTerm(searchTerm)}
+              className="w-fit h-fit bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              <FaSearch className="w-5 h-5 bg" />
+              {}
+            </button>
           </div>
           <table className="w-full border-collapse border text-left">
             <thead>
               <tr className="bg-gray-200">
-              <th className="border px-4 py-2">First Name</th>
-              <th className="border px-4 py-2">Last Name</th>
+                <th className="border px-4 py-2">First Name</th>
+                <th className="border px-4 py-2">Last Name</th>
                 <th className="border px-4 py-2">Username</th>
                 <th className="border px-4 py-2">Password</th>
                 <th className="border px-4 py-2">Actions</th>
@@ -169,13 +184,15 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                       }}
                       className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-yellow-600"
                     >
-                      Edit
+                      <FiEdit className="w-5 h-5 bg" />
+                      {}
                     </button>
                     <button
                       onClick={() => deleteUser(user.username)}
                       className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                     >
-                      Delete
+                      <MdDelete className="w-5 h-5 bg" />
+                      {}
                     </button>
                   </td>
                 </tr>

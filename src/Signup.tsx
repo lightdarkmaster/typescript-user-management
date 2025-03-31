@@ -7,7 +7,6 @@ import { Properties } from "./types";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 
 
-
 const Signup: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
