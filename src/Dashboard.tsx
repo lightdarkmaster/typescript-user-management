@@ -6,6 +6,9 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
+
+
 
 const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUsername] = useState("");
@@ -52,6 +55,15 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const deleteUser = (username: string) => {
     setUsers(users.filter((user) => user.username !== username));
     Swal.fire("Deleted", "User has been removed", "success");
+  };
+
+
+  const viewDetails = (user: { username: string; firstname: string }) => {
+    Swal.fire({
+      title: user.username,
+      text: `Firstname: ${user.firstname}`,
+      icon: "info",
+    });
   };
 
   const updateUser = () => {
@@ -162,7 +174,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                   <td className="border px-4 py-2">{user.firstname}</td>
                   <td className="border px-4 py-2">{user.lastname}</td>
                   <td className="border px-4 py-2">{user.username}</td>
-                  <td className="border px-4 py-2">
+                  <td className="border px-4 py-2 justify-between">
                     {showPasswords[user.username] ? user.password : "********"}
                     <span className="w-fit h-fit">
                       <button
@@ -173,7 +185,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                       </button>
                     </span>
                   </td>
-                  <td className="border px-4 py-2 flex gap-2">
+                  <td className="px-4 py-2 flex gap-2 justify-evenly">
                     <button
                       onClick={() => {
                         setEditingUser(user.username);
@@ -182,7 +194,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                         setFirstName(user.firstname);
                         setLastName(user.lastname);
                       }}
-                      className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700"
                     >
                       <FiEdit className="w-5 h-5 bg" />
                       {}
@@ -192,6 +204,13 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                       className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                     >
                       <MdDelete className="w-5 h-5 bg" />
+                      {}
+                    </button>
+                    <button
+                      onClick={() => viewDetails}
+                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                    >
+                      <FaEye  className="w-5 h-5 bg" />
                       {}
                     </button>
                   </td>
