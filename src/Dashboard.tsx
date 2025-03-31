@@ -20,7 +20,9 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     [key: string]: boolean;
   }>({});
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [date, setDate]= useState("");  
+  const [originalUsers] = useState([...users]); // Store original order
+  const [isSorted, setIsSorted] = useState(false);
   const togglePasswordVisibility = (username: string) => {
     setShowPasswords((prev) => ({
       ...prev,
@@ -43,7 +45,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     if (found) {
       Swal.fire("Error", "Username already exists", "error");
     } else {
-      setUsers([...users, { username, password, firstname, lastname }]);
+      setUsers([...users, { username, password, firstname, lastname, date }]);
       setUsername("");
       setPassword("");
       setFirstName("");
@@ -66,7 +68,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   };
 
   const updateUser = () => {
-    if (!username || !password || !firstname || !lastname) {
+    if (!username || !password || !firstname || !lastname || !date) {
       Swal.fire("Error", "Please enter a new username and password", "error");
       return;
     }
@@ -74,7 +76,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setUsers(
       users.map((user) =>
         user.username === editingUser
-          ? { username, password, firstname, lastname }
+          ? { username, password, firstname, lastname, date }
           : user
       )
     );
@@ -83,12 +85,40 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setPassword("");
     setFirstName("");
     setLastName("");
+    setDate("")
     Swal.fire("Updated", "User information updated", "success");
   };
 
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  
+  // Sorting algorithms
+  const toggleUserNameSort = () => {
+    if (isSorted) {
+      setUsers([...originalUsers]); // Restore original list
+    } else {
+      const sortedUsers = [...users].sort((a, b) => a.username.localeCompare(b.username));
+      setUsers(sortedUsers);
+    }
+    setIsSorted(!isSorted);
+  };
+  
+
+  const firstnameSort = () => {
+    const sortedUsers = [...users].sort((a, b) => a.firstname.localeCompare(b.firstname));
+    setUsers(sortedUsers);
+  };
+
+  const lastnameSort=()=>{
+    const sortedUsers = [...users].sort((a, b) => a.lastname.localeCompare(b.lastname));
+    setUsers(sortedUsers);
+  };
+
+  const dateSort = () => {
+    setUsers([...users].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
+  };
 
   return (
     <div className="w-full h-screen flex flex-col gap-4 poppins-light">
@@ -116,6 +146,13 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              className="border p-2 rounded w-full mb-4"
+            />
+            <input
+              type="date"
+              placeholder="Date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
               className="border p-2 rounded w-full mb-4"
             />
             <input
@@ -163,17 +200,22 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
               <tr className="bg-gray-200">
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    First Name <FaSort className="cursor-pointer" />
+                    First Name <FaSort className="cursor-pointer" onClick={firstnameSort}/>
                   </div>
                 </th>
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    Last Name <FaSort className="cursor-pointer"/>
+                    Last Name <FaSort className="cursor-pointer" onClick={lastnameSort}/>
                   </div>
                 </th>
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    Username <FaSort className="cursor-pointer"/>
+                    Username <FaSort className="cursor-pointer" onClick={toggleUserNameSort}/>
+                  </div>
+                </th>
+                <th className="border px-4 py-2 text-center">
+                  <div className="flex justify-center items-center gap-1">
+                    Date <FaSort className="cursor-pointer" onClick={dateSort}/>
                   </div>
                 </th>
                 <th className="border px-4 py-2 text-center">
@@ -195,6 +237,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                   <td className="border px-4 py-2">{user.firstname}</td>
                   <td className="border px-4 py-2">{user.lastname}</td>
                   <td className="border px-4 py-2">{user.username}</td>
+                  <td className="border px-4 py-2">{user.date}</td>
                   <td className="border px-4 py-2 justify-between">
                     {showPasswords[user.username] ? user.password : "********"}
                     <span className="w-fit h-fit">

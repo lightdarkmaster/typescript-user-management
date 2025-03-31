@@ -12,6 +12,7 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
   const [password, setPassword] = useState<string>("");
   const [firstname, setFirstName] = useState<string>("");
   const [lastname, setLastName] = useState<string>("");
+  const [date, setDate] = useState<string>("");
 
   const emptyModal = () => {
     Swal.fire({
@@ -41,12 +42,12 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
   const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (username.trim() === "" || password.trim() === "" || firstname.trim() ==="" || lastname.trim() ==="") {
+    if (username.trim() === "" || password.trim() === "" || firstname.trim() ==="" || lastname.trim() ==="" || date) {
       emptyModal();
       return;
     }
 
-    const newUser = { username, password, firstname, lastname };
+    const newUser = { username, password, firstname, lastname, date };
 
     setUsers([...users, newUser]);
 
@@ -59,11 +60,12 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
     } else {
       registerModal();
     }
-    setUsers([...users, { username, password, firstname, lastname}]);
+    setUsers([...users, { username, password, firstname, lastname, date}]);
     setUserName("");
     setPassword("");
     setFirstName("");
     setLastName("");
+    setDate("");
   };
 
   return (
