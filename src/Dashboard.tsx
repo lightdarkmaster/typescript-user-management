@@ -129,14 +129,14 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
             {editingUser ? (
               <button
                 onClick={updateUser}
-                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 cursor-pointer"
               >
                 Save Changes
               </button>
             ) : (
               <button
                 onClick={addUser}
-                className="w-fit h-fit bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center justify-center"
+                className="w-fit h-fit bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center justify-center cursor-pointer"
               >
                 <IoAddCircleSharp className="w-5 h-5 bg" /> {}
               </button>
@@ -152,7 +152,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
             />
             <button
               onClick={() => setSearchTerm(searchTerm)}
-              className="w-fit h-fit bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="w-fit h-fit bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
             >
               <FaSearch className="w-5 h-5 bg" />
               {}
@@ -194,21 +194,21 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                         setFirstName(user.firstname);
                         setLastName(user.lastname);
                       }}
-                      className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700"
+                      className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 cursor-pointer"
                     >
                       <FiEdit className="w-5 h-5 bg" />
                       {}
                     </button>
                     <button
                       onClick={() => deleteUser(user.username)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 cursor-pointer"
                     >
                       <MdDelete className="w-5 h-5 bg" />
                       {}
                     </button>
                     <button
                       onClick={() => viewDetails}
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 cursor-pointer"
                     >
                       <FaEye  className="w-5 h-5 bg" />
                       {}
