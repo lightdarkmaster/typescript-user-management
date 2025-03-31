@@ -7,8 +7,8 @@ import { FaSearch } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
-
-
+import { IoSaveSharp } from "react-icons/io5";
+import { FaSort } from "react-icons/fa";
 
 const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUsername] = useState("");
@@ -56,7 +56,6 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setUsers(users.filter((user) => user.username !== username));
     Swal.fire("Deleted", "User has been removed", "success");
   };
-
 
   const viewDetails = (user: { username: string; firstname: string }) => {
     Swal.fire({
@@ -129,9 +128,10 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
             {editingUser ? (
               <button
                 onClick={updateUser}
-                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 cursor-pointer"
+                className="bg-yellow-500 text-white px-4 h-[45px] rounded hover:bg-yellow-600 cursor-pointer"
               >
-                Save Changes
+                <IoSaveSharp className="w-fit h-fit bg" />
+                {}
               </button>
             ) : (
               <button
@@ -161,13 +161,34 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
           <table className="w-full border-collapse border text-left">
             <thead>
               <tr className="bg-gray-200">
-                <th className="border px-4 py-2">First Name</th>
-                <th className="border px-4 py-2">Last Name</th>
-                <th className="border px-4 py-2">Username</th>
-                <th className="border px-4 py-2">Password</th>
-                <th className="border px-4 py-2">Actions</th>
+                <th className="border px-4 py-2 text-center">
+                  <div className="flex justify-center items-center gap-1">
+                    First Name <FaSort className="cursor-pointer" />
+                  </div>
+                </th>
+                <th className="border px-4 py-2 text-center">
+                  <div className="flex justify-center items-center gap-1">
+                    Last Name <FaSort className="cursor-pointer"/>
+                  </div>
+                </th>
+                <th className="border px-4 py-2 text-center">
+                  <div className="flex justify-center items-center gap-1">
+                    Username <FaSort className="cursor-pointer"/>
+                  </div>
+                </th>
+                <th className="border px-4 py-2 text-center">
+                  <div className="flex justify-center items-center gap-1">
+                    Password
+                  </div>
+                </th>
+                <th className="border px-4 py-2 text-center">
+                  <div className="flex justify-center items-center gap-1">
+                    Actions 
+                  </div>
+                </th>
               </tr>
             </thead>
+
             <tbody className="justify-evenly">
               {filteredUsers.map((user) => (
                 <tr key={user.username} className="border justify-between">
@@ -179,7 +200,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                     <span className="w-fit h-fit">
                       <button
                         onClick={() => togglePasswordVisibility(user.username)}
-                        className="ml-2 text-blue-500 hover:underline"
+                        className="ml-2 text-blue-500 hover:underline cursor-pointer"
                       >
                         {showPasswords[user.username] ? "Hide" : "Show"}
                       </button>
@@ -210,7 +231,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                       onClick={() => viewDetails}
                       className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 cursor-pointer"
                     >
-                      <FaEye  className="w-5 h-5 bg" />
+                      <FaEye className="w-5 h-5 bg" />
                       {}
                     </button>
                   </td>
