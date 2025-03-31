@@ -81,6 +81,8 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
               className="w-full outline-none bg-transparent"
               value={firstname}
               onChange={(e) => setFirstName(e.target.value)}
+              autoComplete="off"
+              required
             />
           </div>
           <div className="flex items-center gap-2 border p-3 rounded-lg">
@@ -91,6 +93,8 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
               className="w-full outline-none bg-transparent"
               value={lastname}
               onChange={(e) => setLastName(e.target.value)}
+              autoComplete="off"
+              required
             />
           </div>
           <div className="flex items-center gap-2 border p-3 rounded-lg">
@@ -101,6 +105,8 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
               className="w-full outline-none bg-transparent"
               value={username}
               onChange={(e) => setUserName(e.target.value)}
+              autoComplete="off"
+              required
             />
           </div>
           <div className="flex items-center gap-2 border p-3 rounded-lg">
@@ -111,6 +117,8 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
               className="w-full outline-none bg-transparent"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="off"
+              required
             />
           </div>
           <button className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition">
