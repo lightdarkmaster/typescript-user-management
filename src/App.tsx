@@ -4,7 +4,7 @@ import Login from './Login';
 import Signup from './Signup';
 import { StrictMode } from 'react';
 import { useState } from 'react';
-import {User } from "./Types"
+import {User } from "./types"
 import LandingPage from './LandingPage';
 function App() {
 

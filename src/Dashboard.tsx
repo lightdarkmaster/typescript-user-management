@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar";
-import { Properties } from "./Types";
+import { Properties } from "./types";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
@@ -60,7 +60,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   );
 
   return (
-    <div className="w-full h-screen flex flex-col gap-4">
+    <div className="w-full h-screen flex flex-col gap-4 poppins-light">
       <Navbar />
       <div className="flex justify-center items-center h-full">
         <div className="w-2/3 bg-white p-6 rounded-lg shadow-lg">
@@ -141,7 +141,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                         setUsername(user.username);
                         setPassword(user.password);
                       }}
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-yellow-600"
                     >
                       Edit
                     </button>

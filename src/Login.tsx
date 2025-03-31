@@ -3,7 +3,7 @@ import { LuLockKeyhole } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, SetStateAction } from "react";
 import Swal from "sweetalert2";
-import { Properties } from "./Types";
+import { Properties } from "./types";
 
 const Login: React.FC<Properties> = ({ users }) => {
   const [username, setUsername] = useState("");
@@ -66,7 +66,7 @@ const Login: React.FC<Properties> = ({ users }) => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center p-4 text-black">
+    <div className="w-full h-screen flex items-center justify-center p-4 text-black poppins-light">
       <div className="w-fit min-w-[300px] p-6 bg-white shadow-md rounded-lg flex flex-col">
         <div className="text-center">
           <h1 className="text-black text-xl font-bold">Sign In</h1>
