@@ -71,7 +71,13 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
       return;
     }
 
-    const newUser = { username, password, firstname, lastname, date: timestamp };
+    const newUser = {
+      username,
+      password,
+      firstname,
+      lastname,
+      date: timestamp,
+    };
 
     setUsers([...users, newUser]);
 
@@ -145,7 +151,11 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
               className="absolute right-3 text-gray-600"
               onClick={togglePasswordVisibility}
             >
-              {showPassword ? <IoEyeOutline className="text-xl" /> : <IoEyeOffOutline className="text-xl" />}
+              {showPassword ? (
+                <IoEyeOutline className="text-xl" />
+              ) : (
+                <IoEyeOffOutline className="text-xl" />
+              )}
             </button>
           </div>
           <input

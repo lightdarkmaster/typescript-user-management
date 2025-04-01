@@ -46,11 +46,15 @@ const Login: React.FC<Properties> = ({ users }) => {
     });
   };
 
-  const handleUsernameChange = (e: { target: { value: SetStateAction<string> } }) => {
+  const handleUsernameChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setUsername(e.target.value);
   };
 
-  const handlePasswordChange = (e: { target: { value: SetStateAction<string> } }) => {
+  const handlePasswordChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setPassword(e.target.value);
   };
 
@@ -62,7 +66,9 @@ const Login: React.FC<Properties> = ({ users }) => {
       return;
     }
 
-    const found = users.find((user) => user.username === username && user.password === password);
+    const found = users.find(
+      (user) => user.username === username && user.password === password
+    );
 
     if (found) {
       loginSuccessModal({ username });
@@ -106,7 +112,11 @@ const Login: React.FC<Properties> = ({ users }) => {
               className="absolute right-3 text-gray-600"
               onClick={togglePasswordVisibility}
             >
-              {showPassword ? <IoEyeOutline className="text-xl" /> : <IoEyeOffOutline className="text-xl" />}
+              {showPassword ? (
+                <IoEyeOutline className="text-xl" />
+              ) : (
+                <IoEyeOffOutline className="text-xl" />
+              )}
             </button>
           </div>
           <button className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition">
@@ -115,7 +125,10 @@ const Login: React.FC<Properties> = ({ users }) => {
           <div className="text-center text-sm">
             <p>
               Don't have an account?{" "}
-              <Link to="/signup" className="text-blue-700 font-semibold hover:underline">
+              <Link
+                to="/signup"
+                className="text-blue-700 font-semibold hover:underline"
+              >
                 Sign Up
               </Link>
             </p>
