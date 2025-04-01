@@ -9,11 +9,12 @@ function Footer() {
           <p>Phone: +123 456 78910 (Secret 🤫)</p>
         </div>
 
-
         <div className="text-center mt-4 md:mt-0">
-          <p>&copy; {new Date().getFullYear()} Christian Barbosa. All Rights Reserved.</p>  
+          <p>
+            &copy; {new Date().getFullYear()} Christian Barbosa. All Rights
+            Reserved.
+          </p>
         </div>
-
 
         <div className="text-center mt-4 md:mt-0 flex flex-col">
           <h2 className="text-xl font-semibold">Follow Me</h2>
