@@ -21,6 +21,10 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   }>({});
   const [searchTerm, setSearchTerm] = useState("");
   const [date, setDate]= useState("");
+  const [isUsernameAsc, setIsUsernameAsc] = useState(true);
+  const [isFirstnameAsc, setIsFirstnameAsc] = useState(true);
+  const [isLastnameAsc, setIsLastnameAsc] = useState(true);
+  const [isDateAsc, setIsDateAsc] = useState(true);
   // const [originalUsers] = useState([...users]); // Store original order
   // const [isSorted, setIsSorted] = useState(false);
   
@@ -100,24 +104,36 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   );
 
   
-  const usernameSort=()=>{
-    const sortedUsers = [...users].sort((a,b)=> a.username.localeCompare(b.username));
+  const usernameSort = () => {
+    const sortedUsers = [...users].sort((a, b) => 
+      isUsernameAsc ? a.username.localeCompare(b.username) : b.username.localeCompare(a.username));
     setUsers(sortedUsers);
-  }
+    setIsUsernameAsc(!isUsernameAsc); // Toggle order for next click
+  };
   
 
   const firstnameSort = () => {
-    const sortedUsers = [...users].sort((a, b) => a.firstname.localeCompare(b.firstname));
+    const sortedUsers = [...users].sort((a, b) =>
+    isFirstnameAsc ? a.firstname.localeCompare(b.firstname) : b.firstname.localeCompare(a.firstname));
     setUsers(sortedUsers);
+    setIsFirstnameAsc(!isFirstnameAsc);
   };
 
   const lastnameSort=()=>{
-    const sortedUsers = [...users].sort((a, b) => a.lastname.localeCompare(b.lastname));
+    const sortedUsers = [...users].sort((a, b) => 
+    isLastnameAsc ? a.lastname.localeCompare(b.lastname) : b.lastname.localeCompare(a.lastname));
     setUsers(sortedUsers);
+    setIsLastnameAsc(!setIsLastnameAsc);
   };
 
   const dateSort = () => {
-    setUsers([...users].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
+    const sortedUsers = [...users].sort((a, b) => 
+      isDateAsc 
+        ? new Date(a.date).getTime() - new Date(b.date).getTime()
+        : new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+    setUsers(sortedUsers);
+    setIsDateAsc(!isDateAsc);
   };
 
   return (
