@@ -11,6 +11,7 @@ import { IoSaveSharp } from "react-icons/io5";
 import { FaSort } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import Footer from "./components/Footer";
 
 const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUsername] = useState("");
@@ -28,8 +29,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [isLastnameAsc, setIsLastnameAsc] = useState(true);
   const [isDateAsc, setIsDateAsc] = useState(true);
   const navigate = useNavigate();
-  // const [originalUsers] = useState([...users]); // Store original order
-  // const [isSorted, setIsSorted] = useState(false);
+
 
   const togglePasswordVisibility = (username: string) => {
     setShowPasswords((prev) => ({
@@ -330,6 +330,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
           </table>
         </div>
       </div>
+    <Footer/>
     </div>
   );
 };
