@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { LuLockKeyhole } from "react-icons/lu";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Properties } from "./types";
 import { MdDriveFileRenameOutline } from "react-icons/md";
-
 
 const Signup: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUserName] = useState<string>("");
@@ -13,12 +13,12 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
   const [firstname, setFirstName] = useState<string>("");
   const [lastname, setLastName] = useState<string>("");
   const [date, setDate] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
-
-
-
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const emptyModal = () => {
     Swal.fire({
@@ -41,37 +41,49 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Username already exist!",
+      text: "Username already exists!",
       footer: '<a href="#">Why do I have this issue?</a>',
     });
   };
+
   const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (username.trim() === "" || password.trim() === "" || firstname.trim() ==="" || lastname.trim() ==="" || date) {
+    const now = new Date();
+    const formattedDate = now.toISOString().split("T")[0];
+    const formattedTime = now.toLocaleTimeString("en-US", { hour12: false });
+    const timestamp = `${formattedDate} ${formattedTime}`;
+
+    if (
+      username.trim() === "" ||
+      password.trim() === "" ||
+      firstname.trim() === "" ||
+      lastname.trim() === "" ||
+      timestamp.trim() === ""
+    ) {
       emptyModal();
       return;
     }
-    navigate("/login");
-    const newUser = { username, password, firstname, lastname, date };
+
+    const found = users.find((user) => user.username === username);
+    if (found) {
+      modalForDuplicate();
+      return;
+    }
+
+    const newUser = { username, password, firstname, lastname, date: timestamp };
 
     setUsers([...users, newUser]);
 
-    console.log(users);
-
     registerModal();
-    const found = users.find((users) => users.username === username);
-    if (found) {
-      modalForDuplicate();
-    } else {
-      registerModal();
-    }
-    setUsers([...users, { username, password, firstname, lastname, date}]);
+
     setUserName("");
     setPassword("");
     setFirstName("");
     setLastName("");
     setDate("");
+
+    navigate("/login");
   };
 
   return (
@@ -81,8 +93,8 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
           <h1 className="text-black text-xl font-bold">Sign Up</h1>
         </div>
         <form className="flex flex-col gap-4 mt-4" onSubmit={registerUser}>
-        <div className="flex items-center gap-2 border p-3 rounded-lg">
-            <MdDriveFileRenameOutline  className="text-xl" />
+          <div className="flex items-center gap-2 border p-3 rounded-lg">
+            <MdDriveFileRenameOutline className="text-xl" />
             <input
               type="text"
               placeholder="Firstname"
@@ -94,7 +106,7 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
             />
           </div>
           <div className="flex items-center gap-2 border p-3 rounded-lg">
-            <MdDriveFileRenameOutline  className="text-xl" />
+            <MdDriveFileRenameOutline className="text-xl" />
             <input
               type="text"
               placeholder="Lastname"
@@ -117,10 +129,10 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
               required
             />
           </div>
-          <div className="flex items-center gap-2 border p-3 rounded-lg">
+          <div className="flex items-center gap-2 border p-3 rounded-lg relative">
             <LuLockKeyhole className="text-xl" />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               className="w-full outline-none bg-transparent"
               value={password}
@@ -128,7 +140,21 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
               autoComplete="off"
               required
             />
+            <button
+              type="button"
+              className="absolute right-3 text-gray-600"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoEyeOutline className="text-xl" /> : <IoEyeOffOutline className="text-xl" />}
+            </button>
           </div>
+          <input
+            type="date"
+            placeholder="Date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="border p-2 rounded w-full mb-4 hidden"
+          />
           <button className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition">
             Sign Up
           </button>

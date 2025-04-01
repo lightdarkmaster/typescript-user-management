@@ -42,10 +42,15 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   };
 
   const addUser = () => {
+    const now = new Date();
+    const formattedDate = now.toISOString().split("T")[0];
+    const formattedTime = now.toLocaleTimeString("en-US", { hour12: false });
+    const timestamp = `${formattedDate} ${formattedTime}`;
+
     if (!username || !password || !firstname || !lastname) {
       Swal.fire(
         "Error",
-        "Please enter a username, password,firstname and lastname",
+        "Please enter a username, password, firstname, and lastname",
         "error"
       );
       return;
@@ -56,11 +61,16 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     if (found) {
       Swal.fire("Error", "Username already exists", "error");
     } else {
-      setUsers([...users, { username, password, firstname, lastname, date }]);
+      setUsers([
+        ...users,
+        { username, password, firstname, lastname, date: timestamp },
+      ]);
+
       setUsername("");
       setPassword("");
       setFirstName("");
       setLastName("");
+
       Swal.fire({
         title: "Success!",
         text: "User added successfully!",
@@ -118,7 +128,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   };
 
   const updateUser = () => {
-    if (!username || !password || !firstname || !lastname || !date) {
+    if (!username || !password || !firstname || !lastname) {
       Swal.fire("Error", "All fields are required", "error");
       return;
     }
@@ -126,16 +136,16 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setUsers(
       users.map((user) =>
         user.username === editingUser
-          ? { username, password, firstname, lastname, date }
+          ? { ...user, username, password, firstname, lastname }
           : user
       )
     );
+
     setEditingUser(null);
     setUsername("");
     setPassword("");
     setFirstName("");
     setLastName("");
-    setDate("");
 
     Swal.fire("Updated", "User information updated successfully", "success");
   };
@@ -224,7 +234,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                 placeholder="Date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="border p-2 rounded w-full mb-4"
+                className="border p-2 rounded w-full mb-4 hidden"
               />
               <div className="w-full h-full relative">
                 {showPass ? (
@@ -243,7 +253,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                   />
                 )}
                 <input
-                  type={showPass ? 'text' : 'password'}
+                  type={showPass ? "text" : "password"}
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -313,7 +323,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                 </th>
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    Date{" "}
+                    Date Created{" "}
                     <FaSort className="cursor-pointer" onClick={dateSort} />
                   </div>
                 </th>
