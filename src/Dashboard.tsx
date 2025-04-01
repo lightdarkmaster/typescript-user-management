@@ -12,6 +12,8 @@ import { FaSort } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
+import { IoMdEye } from "react-icons/io";
+import { IoIosEyeOff } from "react-icons/io";
 
 const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUsername] = useState("");
@@ -29,7 +31,6 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [isLastnameAsc, setIsLastnameAsc] = useState(true);
   const [isDateAsc, setIsDateAsc] = useState(true);
   const navigate = useNavigate();
-
 
   const togglePasswordVisibility = (username: string) => {
     setShowPasswords((prev) => ({
@@ -141,12 +142,10 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setIsDateAsc(!isDateAsc);
   };
 
-  const logout=()=>{
+  const logout = () => {
     localStorage.removeItem("loggedInUser");
     navigate("/login");
-  }
-
-
+  };
 
   return (
     <div className="w-full h-screen flex flex-col gap-4 poppins-light">
@@ -285,17 +284,24 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                   <td className="border px-4 py-2">{user.lastname}</td>
                   <td className="border px-4 py-2">{user.username}</td>
                   <td className="border px-4 py-2">{user.date}</td>
-                  <td className="border px-4 py-2 justify-between">
-                    {showPasswords[user.username] ? user.password : "********"}
-                    <span className="w-fit h-fit">
+                  <td className="border px-4 py-2 text-center align-middle">
+                    <div className="flex items-center justify-center gap-2">
+                      {showPasswords[user.username]
+                        ? user.password
+                        : "********"}
                       <button
                         onClick={() => togglePasswordVisibility(user.username)}
-                        className="ml-2 text-blue-500 hover:underline cursor-pointer"
+                        className="text-blue-500 hover:underline cursor-pointer flex items-center justify-center"
                       >
-                        {showPasswords[user.username] ? "Hide" : "Show"}
+                        {showPasswords[user.username] ? (
+                          <IoIosEyeOff className="w-[20px] h-[20px]" />
+                        ) : (
+                          <IoMdEye className="w-[20px] h-[20px]" />
+                        )}
                       </button>
-                    </span>
+                    </div>
                   </td>
+
                   <td className="px-4 py-2 flex gap-2 justify-evenly">
                     <button
                       onClick={() => {
@@ -331,7 +337,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
           </table>
         </div>
       </div>
-    <Footer/>
+      <Footer />
     </div>
   );
 };
