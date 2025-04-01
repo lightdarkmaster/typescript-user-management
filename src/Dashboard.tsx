@@ -1,7 +1,8 @@
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Swal from "sweetalert2";
 import { Properties } from "./types";
 import { useState } from "react";
-import Swal from "sweetalert2";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
@@ -11,7 +12,6 @@ import { IoSaveSharp } from "react-icons/io5";
 import { FaSort } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import Footer from "./components/Footer";
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 
@@ -99,8 +99,12 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   };
 
   const filteredUsers = users.filter((user) =>
-    user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.date.includes(searchTerm)
   );
+  
 
   const usernameSort = () => {
     const sortedUsers = [...users].sort((a, b) =>
