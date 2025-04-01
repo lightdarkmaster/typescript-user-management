@@ -193,7 +193,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
 
   const logoutModal = () => {
     Swal.fire({
-      title: "Bye See you Again!",
+      title: "See you Again!",
       text: "Logout Successfully",
       imageUrl: "/images/waving.gif",
       imageWidth: 300,

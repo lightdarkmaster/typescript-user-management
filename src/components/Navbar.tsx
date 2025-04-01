@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function Navbar() {
   const [username, setUsername] = useState<string | null>(null);
+  const [profileImage, setProfileImage] = useState<string>("");
 
   useEffect(() => {
     const storedUser = localStorage.getItem("loggedInUser");
@@ -12,12 +13,23 @@ function Navbar() {
       if (typeof parsedUser === "object" && parsedUser.username) {
         setUsername(parsedUser.username);
       } else {
-        setUsername(parsedUser); 
+        setUsername(parsedUser);
       }
     } catch {
-      
       setUsername(storedUser);
     }
+
+    const profileImages = [
+      "/images/profiles/samplepic2.png",
+      "/images/profiles/samplepic3.jpg",
+      "/images/profiles/samplepic4.jpg",
+      "/images/profiles/bae.gif",
+      "/images/profiles/kyj.gif",
+
+    ];
+
+    const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
+    setProfileImage(randomImage);
   }, []);
 
   return (
@@ -29,11 +41,11 @@ function Navbar() {
       {username && (
         <div className="ml-auto pr-5 flex gap-[10px] items-center">
           <img
-            src="/images/wavingchild.gif"
-            alt="Landing Page Illustration"
-            className="w-[30px] h-[30px] animate-fade-in rounded-full shadow-md items-center border cursor-pointer"
+            src={profileImage}
+            alt="User Avatar"
+            className="w-[30px] h-[30px] animate-fade-in rounded-full shadow-md border cursor-pointer"
           />
-          Hello, <span className="font-semibold cursor-pointer ">{username}!</span>
+          Hello, <span className="font-semibold cursor-pointer">{username}!</span>
         </div>
       )}
     </div>
