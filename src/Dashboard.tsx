@@ -189,7 +189,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col gap-4 poppins-light bg-gradient-to-br from-blue-100 to-purple-100">
+    <div className="w-full h-screen flex flex-col gap-4 poppins-light bg-gradient-to-br from-blue-200 to-purple-100">
       <Navbar />
       <div className="flex justify-center items-center h-full">
         <div className="w-2/3 bg-white p-6 rounded-lg shadow-lg">

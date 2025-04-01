@@ -75,7 +75,7 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center p-4 text-black poppins-light">
+    <div className="w-full h-screen flex items-center justify-center p-4 text-black poppins-light bg-gradient-to-br from-blue-500 to-purple-600">
       <div className="min-w-[400px] p-6 bg-white shadow-md rounded-lg flex flex-col">
         <div className="text-center">
           <h1 className="text-black text-xl font-bold">Sign Up</h1>
