@@ -12,3 +12,8 @@ export interface User {
     setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   }
   
+
+ export interface UserModalProps {
+    user: User | null;
+    onClose: () => void;
+  }

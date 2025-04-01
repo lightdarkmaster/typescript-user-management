@@ -20,15 +20,16 @@ const Login: React.FC<Properties> = ({ users }) => {
     });
   };
 
-  const loginSuccessModal = () => {
+  const loginSuccessModal = (user: { username: string }) => {
     Swal.fire({
       imageUrl: "/images/welcome.gif",
       imageWidth: 200,
       imageHeight: 200,
-      title: "Logged In Successfully!",
+      title: `Welcome, ${user.username}!`,
       draggable: true,
     });
   };
+  
 
   const loginNotSuccessful = () => {
     Swal.fire({
@@ -59,7 +60,7 @@ const Login: React.FC<Properties> = ({ users }) => {
     const found = users.find((user) => user.username === username && user.password === password);
   
     if (found) {
-      loginSuccessModal();
+      loginSuccessModal({username});
       localStorage.setItem("loggedInUser", JSON.stringify(found)); //pag store han user session
       navigate("/dashboard");
       setUsername("");
