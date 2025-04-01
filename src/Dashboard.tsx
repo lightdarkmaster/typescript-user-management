@@ -9,6 +9,8 @@ import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { IoSaveSharp } from "react-icons/io5";
 import { FaSort } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUsername] = useState("");
@@ -20,18 +22,14 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     [key: string]: boolean;
   }>({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [date, setDate]= useState("");
+  const [date, setDate] = useState("");
   const [isUsernameAsc, setIsUsernameAsc] = useState(true);
   const [isFirstnameAsc, setIsFirstnameAsc] = useState(true);
   const [isLastnameAsc, setIsLastnameAsc] = useState(true);
   const [isDateAsc, setIsDateAsc] = useState(true);
+  const navigate = useNavigate();
   // const [originalUsers] = useState([...users]); // Store original order
   // const [isSorted, setIsSorted] = useState(false);
-  
-
-
-
-
 
   const togglePasswordVisibility = (username: string) => {
     setShowPasswords((prev) => ({
@@ -95,7 +93,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setPassword("");
     setFirstName("");
     setLastName("");
-    setDate("")
+    setDate("");
     Swal.fire("Updated", "User information updated", "success");
   };
 
@@ -103,32 +101,39 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     user.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  
   const usernameSort = () => {
-    const sortedUsers = [...users].sort((a, b) => 
-      isUsernameAsc ? a.username.localeCompare(b.username) : b.username.localeCompare(a.username));
+    const sortedUsers = [...users].sort((a, b) =>
+      isUsernameAsc
+        ? a.username.localeCompare(b.username)
+        : b.username.localeCompare(a.username)
+    );
     setUsers(sortedUsers);
     setIsUsernameAsc(!isUsernameAsc); // Toggle order for next click
   };
-  
 
   const firstnameSort = () => {
     const sortedUsers = [...users].sort((a, b) =>
-    isFirstnameAsc ? a.firstname.localeCompare(b.firstname) : b.firstname.localeCompare(a.firstname));
+      isFirstnameAsc
+        ? a.firstname.localeCompare(b.firstname)
+        : b.firstname.localeCompare(a.firstname)
+    );
     setUsers(sortedUsers);
     setIsFirstnameAsc(!isFirstnameAsc);
   };
 
-  const lastnameSort=()=>{
-    const sortedUsers = [...users].sort((a, b) => 
-    isLastnameAsc ? a.lastname.localeCompare(b.lastname) : b.lastname.localeCompare(a.lastname));
+  const lastnameSort = () => {
+    const sortedUsers = [...users].sort((a, b) =>
+      isLastnameAsc
+        ? a.lastname.localeCompare(b.lastname)
+        : b.lastname.localeCompare(a.lastname)
+    );
     setUsers(sortedUsers);
     setIsLastnameAsc(!setIsLastnameAsc);
   };
 
   const dateSort = () => {
-    const sortedUsers = [...users].sort((a, b) => 
-      isDateAsc 
+    const sortedUsers = [...users].sort((a, b) =>
+      isDateAsc
         ? new Date(a.date).getTime() - new Date(b.date).getTime()
         : new Date(b.date).getTime() - new Date(a.date).getTime()
     );
@@ -136,12 +141,27 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setIsDateAsc(!isDateAsc);
   };
 
+  const logout=()=>{
+      navigate("/login");
+  }
+
+
+
   return (
     <div className="w-full h-screen flex flex-col gap-4 poppins-light">
       <Navbar />
       <div className="flex justify-center items-center h-full">
         <div className="w-2/3 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-bold mb-4">Manage Users</h2>
+          <div className="w-full h-fit flex justify-between items-center px-[10px]">
+            <h2 className="text-xl font-bold mb-4">Manage Users</h2>
+            <button
+              onClick={logout}
+              className="bg-red-500 text-white px-5 h-[35px] rounded hover:bg-yellow-600 cursor-pointer"
+            >
+              <BiLogOut className="w-fit h-fit bg" />
+              {}
+            </button>
+          </div>
           <div className="flex gap-[20px] p-[10px]">
             <input
               type="text"
@@ -211,27 +231,37 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
               {}
             </button>
           </div>
+          <div className="w-full h-fit justify-center text-center items-center">
+            <h2 className="text-xl font-bold mb-4">Users Table</h2>
+          </div>
           <table className="w-full border-collapse border text-left">
             <thead>
               <tr className="bg-gray-200">
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    First Name <FaSort className="cursor-pointer" onClick={firstnameSort}/>
+                    First Name{" "}
+                    <FaSort
+                      className="cursor-pointer"
+                      onClick={firstnameSort}
+                    />
                   </div>
                 </th>
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    Last Name <FaSort className="cursor-pointer" onClick={lastnameSort}/>
+                    Last Name{" "}
+                    <FaSort className="cursor-pointer" onClick={lastnameSort} />
                   </div>
                 </th>
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    Username <FaSort className="cursor-pointer" onClick={usernameSort}/>
+                    Username{" "}
+                    <FaSort className="cursor-pointer" onClick={usernameSort} />
                   </div>
                 </th>
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    Date <FaSort className="cursor-pointer" onClick={dateSort}/>
+                    Date{" "}
+                    <FaSort className="cursor-pointer" onClick={dateSort} />
                   </div>
                 </th>
                 <th className="border px-4 py-2 text-center">
@@ -241,7 +271,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                 </th>
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    Actions 
+                    Actions
                   </div>
                 </th>
               </tr>
