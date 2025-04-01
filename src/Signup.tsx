@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { LuLockKeyhole } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Properties } from "./types";
 import { MdDriveFileRenameOutline } from "react-icons/md";
@@ -13,12 +13,18 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
   const [firstname, setFirstName] = useState<string>("");
   const [lastname, setLastName] = useState<string>("");
   const [date, setDate] = useState<string>("");
+  const navigate = useNavigate();
+
+
+
+
+
 
   const emptyModal = () => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Please provide username and password!",
+      text: "Please provide all the information needed",
     });
   };
 
@@ -35,7 +41,7 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Something went wrong!",
+      text: "Username already exist!",
       footer: '<a href="#">Why do I have this issue?</a>',
     });
   };
@@ -46,7 +52,7 @@ const Signup: React.FC<Properties> = ({ users, setUsers }) => {
       emptyModal();
       return;
     }
-
+    navigate("/login");
     const newUser = { username, password, firstname, lastname, date };
 
     setUsers([...users, newUser]);

@@ -20,9 +20,15 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     [key: string]: boolean;
   }>({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [date, setDate]= useState("");  
-  const [originalUsers] = useState([...users]); // Store original order
-  const [isSorted, setIsSorted] = useState(false);
+  const [date, setDate]= useState("");
+  // const [originalUsers] = useState([...users]); // Store original order
+  // const [isSorted, setIsSorted] = useState(false);
+  
+
+
+
+
+
   const togglePasswordVisibility = (username: string) => {
     setShowPasswords((prev) => ({
       ...prev,
@@ -94,16 +100,10 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   );
 
   
-  // Sorting algorithms
-  const toggleUserNameSort = () => {
-    if (isSorted) {
-      setUsers([...originalUsers]); // Restore original list
-    } else {
-      const sortedUsers = [...users].sort((a, b) => a.username.localeCompare(b.username));
-      setUsers(sortedUsers);
-    }
-    setIsSorted(!isSorted);
-  };
+  const usernameSort=()=>{
+    const sortedUsers = [...users].sort((a,b)=> a.username.localeCompare(b.username));
+    setUsers(sortedUsers);
+  }
   
 
   const firstnameSort = () => {
@@ -210,7 +210,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                 </th>
                 <th className="border px-4 py-2 text-center">
                   <div className="flex justify-center items-center gap-1">
-                    Username <FaSort className="cursor-pointer" onClick={toggleUserNameSort}/>
+                    Username <FaSort className="cursor-pointer" onClick={usernameSort}/>
                   </div>
                 </th>
                 <th className="border px-4 py-2 text-center">
