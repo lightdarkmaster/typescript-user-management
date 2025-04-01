@@ -5,13 +5,18 @@ function Navbar() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("loggedInUser");
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser);
-        setUsername(parsedUser.username || parsedUser); // Handle both object and string cases
-      } catch {
-        setUsername(storedUser); // If it's already a string, use it directly
+    if (!storedUser) return;
+
+    try {
+      const parsedUser = JSON.parse(storedUser);
+      if (typeof parsedUser === "object" && parsedUser.username) {
+        setUsername(parsedUser.username); // Handle the case when parsedUser is an object
+      } else {
+        setUsername(parsedUser); // If it's a string, directly use it
       }
+    } catch {
+      // Handle parsing errors, in case the stored user is corrupted or not in the expected format
+      setUsername(storedUser);
     }
   }, []);
 
@@ -23,11 +28,11 @@ function Navbar() {
       </ul>
       {username && (
         <div className="ml-auto pr-5 flex gap-[10px] items-center">
-        <img
-          src="/images/wavingchild.gif"
-          alt="Landing Page Illustration"
-          className="w-[30px] h-[30px] animate-fade-in rounded-full shadow-md items-center border cursor-pointer"
-        />
+          <img
+            src="/images/wavingchild.gif"
+            alt="Landing Page Illustration"
+            className="w-[30px] h-[30px] animate-fade-in rounded-full shadow-md items-center border cursor-pointer"
+          />
           Hello, <span className="font-semibold cursor-pointer">{username}</span>
         </div>
       )}
