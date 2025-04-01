@@ -12,18 +12,21 @@ const Login: React.FC<Properties> = ({ users }) => {
 
   const emptyModal = () => {
     Swal.fire({
-      icon: "error",
       title: "Oops...",
       text: "Please provide username and password!",
+      imageUrl: "/images/please.gif",
+      imageWidth: 200,
+      imageHeight: 200,
     });
   };
 
   const loginSuccessModal = () => {
     Swal.fire({
+      imageUrl: "/images/welcome.gif",
+      imageWidth: 200,
+      imageHeight: 200,
       title: "Logged In Successfully!",
-      icon: "success",
       draggable: true,
-      theme: "dark",
     });
   };
 

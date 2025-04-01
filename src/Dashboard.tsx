@@ -142,8 +142,19 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setIsDateAsc(!isDateAsc);
   };
 
+  const logoutModal = () => {
+    Swal.fire({
+      title: "Bye See you Again!",
+      text: "Logout Successfully",
+      imageUrl: "/images/waving.gif",
+      imageWidth: 300,
+      imageHeight: 200,
+      imageAlt: "Custom image",
+    });
+  };
   const logout = () => {
     localStorage.removeItem("loggedInUser");
+    logoutModal();
     navigate("/login");
   };
 
