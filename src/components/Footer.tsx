@@ -6,7 +6,7 @@ function Footer() {
         <div className="text-center md:text-left">
           <h2 className="text-xl font-semibold">Contact Me</h2>
           <p>Email: christian.barbosa05222001@gmail.com</p>
-          <p>Phone: +123 456 78910</p>
+          <p>Phone: +123 456 78910 (Secret 🤫)</p>
         </div>
 
 
