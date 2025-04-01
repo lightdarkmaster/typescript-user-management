@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer className="w-full h-fit bg-[#2469c3]  text-white py-1">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-        {/* Left Side - Contact Info */}
+        {/* Left */}
         <div className="text-center md:text-left">
           <h2 className="text-xl font-semibold">Contact Me</h2>
           <p>Email: christian.barbosa05222001@gmail.com</p>
