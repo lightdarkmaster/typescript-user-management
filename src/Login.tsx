@@ -1,5 +1,6 @@
 import { FaRegUser } from "react-icons/fa";
 import { LuLockKeyhole } from "react-icons/lu";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, SetStateAction } from "react";
 import Swal from "sweetalert2";
@@ -8,7 +9,12 @@ import { Properties } from "./types";
 const Login: React.FC<Properties> = ({ users }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const emptyModal = () => {
     Swal.fire({
@@ -29,7 +35,6 @@ const Login: React.FC<Properties> = ({ users }) => {
       draggable: true,
     });
   };
-  
 
   const loginNotSuccessful = () => {
     Swal.fire({
@@ -51,17 +56,17 @@ const Login: React.FC<Properties> = ({ users }) => {
 
   const loginSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-  
+
     if (!username.trim() || !password.trim()) {
       emptyModal();
       return;
     }
-  
+
     const found = users.find((user) => user.username === username && user.password === password);
-  
+
     if (found) {
-      loginSuccessModal({username});
-      localStorage.setItem("loggedInUser", JSON.stringify(found)); //pag store han user session
+      loginSuccessModal({ username });
+      localStorage.setItem("loggedInUser", JSON.stringify(found));
       navigate("/dashboard");
       setUsername("");
       setPassword("");
@@ -69,7 +74,6 @@ const Login: React.FC<Properties> = ({ users }) => {
       loginNotSuccessful();
     }
   };
-  
 
   return (
     <div className="w-full h-screen flex items-center justify-center p-4 text-black poppins-light bg-gradient-to-br from-blue-500 to-purple-600">
@@ -88,15 +92,22 @@ const Login: React.FC<Properties> = ({ users }) => {
               onChange={handleUsernameChange}
             />
           </div>
-          <div className="flex items-center gap-2 border p-3 rounded-lg">
+          <div className="flex items-center gap-2 border p-3 rounded-lg relative">
             <LuLockKeyhole className="text-xl" />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               className="w-full outline-none bg-transparent"
               value={password}
               onChange={handlePasswordChange}
             />
+            <button
+              type="button"
+              className="absolute right-3 text-gray-600"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoEyeOutline className="text-xl" /> : <IoEyeOffOutline className="text-xl" />}
+            </button>
           </div>
           <button className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition">
             Sign In
