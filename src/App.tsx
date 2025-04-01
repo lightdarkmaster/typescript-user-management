@@ -6,6 +6,7 @@ import { StrictMode } from 'react';
 import { useState } from 'react';
 import {User } from "./types"
 import LandingPage from './LandingPage';
+import HomePage from './Home';
 function App() {
 
   const [users, setUsers] = useState<User[]>([]);
@@ -15,6 +16,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage/>} />
+          <Route path="/home" element={<HomePage/>} />
           <Route path="/login" element={<Login users={users} setUsers={setUsers} />} />
           <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
           <Route path="/dashboard" element={<Dashboard users={users} setUsers={setUsers} />} />

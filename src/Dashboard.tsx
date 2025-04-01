@@ -10,8 +10,6 @@ import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { IoSaveSharp } from "react-icons/io5";
 import { FaSort } from "react-icons/fa";
-import { BiLogOut } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 
@@ -30,7 +28,6 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [isFirstnameAsc, setIsFirstnameAsc] = useState(true);
   const [isLastnameAsc, setIsLastnameAsc] = useState(true);
   const [isDateAsc, setIsDateAsc] = useState(true);
-  const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
 
   const showPassword = () => {
@@ -191,22 +188,6 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setIsDateAsc(!isDateAsc);
   };
 
-  const logoutModal = () => {
-    Swal.fire({
-      title: "See you Again!",
-      text: "Logout Successfully",
-      imageUrl: "/images/waving.gif",
-      imageWidth: 300,
-      imageHeight: 200,
-      imageAlt: "Custom image",
-    });
-  };
-  const logout = () => {
-    localStorage.removeItem("loggedInUser");
-    logoutModal();
-    navigate("/login");
-  };
-
   return (
     <div className="w-full h-screen flex flex-col gap-4 poppins-light bg-gradient-to-br from-blue-100 to-purple-100">
       <Navbar />
@@ -214,13 +195,6 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
         <div className="w-2/3 bg-white p-6 rounded-lg shadow-lg">
           <div className="w-full h-fit flex justify-between items-center px-[10px]">
             <h2 className="text-xl font-bold mb-4">Manage Users</h2>
-            <button
-              onClick={logout}
-              className="bg-red-500 text-white px-5 h-[35px] rounded hover:bg-yellow-600 cursor-pointer shadow-md"
-            >
-              <BiLogOut className="w-fit h-fit" />
-              {}
-            </button>
           </div>
           <div className="rounded-[10px] shadow-xs mb-2">
             <div className="flex gap-[20px] p-[10px]">

@@ -6,9 +6,9 @@ function LandingPage() {
     <div className="w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white">
 
         <img
-          src="/images/choose.gif"
+          src="/images/usermanager.gif"
           alt="Landing Page Illustration"
-          className="w-fit h-fit mb-6 animate-fade-in rounded-full shadow-md"
+          className="w-[200px] h-[200px] mb-6 animate-fade-in rounded-full shadow-md"
         />
 
       <div className="text-center max-w-2xl">
