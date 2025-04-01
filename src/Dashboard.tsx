@@ -142,7 +142,8 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   };
 
   const logout=()=>{
-      navigate("/login");
+    localStorage.removeItem("loggedInUser");
+    navigate("/login");
   }
 
 

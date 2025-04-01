@@ -47,16 +47,17 @@ const Login: React.FC<Properties> = ({ users }) => {
 
   const loginSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
+  
     if (!username.trim() || !password.trim()) {
       emptyModal();
       return;
     }
-
+  
     const found = users.find((user) => user.username === username && user.password === password);
-
+  
     if (found) {
       loginSuccessModal();
+      localStorage.setItem("loggedInUser", JSON.stringify(found)); //pag store han user session
       navigate("/dashboard");
       setUsername("");
       setPassword("");
@@ -64,6 +65,7 @@ const Login: React.FC<Properties> = ({ users }) => {
       loginNotSuccessful();
     }
   };
+  
 
   return (
     <div className="w-full h-screen flex items-center justify-center p-4 text-black poppins-light">
