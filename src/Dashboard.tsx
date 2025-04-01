@@ -113,7 +113,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
         : b.username.localeCompare(a.username)
     );
     setUsers(sortedUsers);
-    setIsUsernameAsc(!isUsernameAsc); // Toggle order for next click
+    setIsUsernameAsc(!isUsernameAsc);
   };
 
   const firstnameSort = () => {

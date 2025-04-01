@@ -10,12 +10,12 @@ function Navbar() {
     try {
       const parsedUser = JSON.parse(storedUser);
       if (typeof parsedUser === "object" && parsedUser.username) {
-        setUsername(parsedUser.username); // Handle the case when parsedUser is an object
+        setUsername(parsedUser.username);
       } else {
-        setUsername(parsedUser); // If it's a string, directly use it
+        setUsername(parsedUser); 
       }
     } catch {
-      // Handle parsing errors, in case the stored user is corrupted or not in the expected format
+      
       setUsername(storedUser);
     }
   }, []);
