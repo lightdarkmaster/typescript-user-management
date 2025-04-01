@@ -68,13 +68,21 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     Swal.fire("Deleted", "User has been removed", "success");
   };
 
-  const viewDetails = (user: { username: string; firstname: string }) => {
+  const viewDetails = (user: { username: string; firstname: string; lastname: string; date: string; password: string }) => {
     Swal.fire({
-      title: user.username,
-      text: `Firstname: ${user.firstname}`,
+      title: `<strong>User Details</strong>`,
+      html: `
+        <p><b>Username:</b> ${user.username}</p>
+        <p><b>Firstname:</b> ${user.firstname}</p>
+        <p><b>Lastname:</b> ${user.lastname}</p>
+        <p><b>Date:</b> ${user.date}</p>
+        <p><b>Password:</b> ${user.password}</p>
+      `,
       icon: "info",
+      confirmButtonText: "Close"
     });
   };
+  
 
   const updateUser = () => {
     if (!username || !password || !firstname || !lastname || !date) {
@@ -133,7 +141,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
         : b.lastname.localeCompare(a.lastname)
     );
     setUsers(sortedUsers);
-    setIsLastnameAsc(!setIsLastnameAsc);
+    setIsLastnameAsc(!isLastnameAsc);
   };
 
   const dateSort = () => {
@@ -163,7 +171,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col gap-4 poppins-light">
+    <div className="w-full h-screen flex flex-col gap-4 poppins-light bg-gradient-to-br from-blue-100 to-purple-100">
       <Navbar />
       <div className="flex justify-center items-center h-full">
         <div className="w-2/3 bg-white p-6 rounded-lg shadow-lg">
@@ -171,80 +179,82 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
             <h2 className="text-xl font-bold mb-4">Manage Users</h2>
             <button
               onClick={logout}
-              className="bg-red-500 text-white px-5 h-[35px] rounded hover:bg-yellow-600 cursor-pointer"
+              className="bg-red-500 text-white px-5 h-[35px] rounded hover:bg-yellow-600 cursor-pointer shadow-md"
             >
-              <BiLogOut className="w-fit h-fit bg" />
+              <BiLogOut className="w-fit h-fit" />
               {}
             </button>
           </div>
-          <div className="flex gap-[20px] p-[10px]">
-            <input
-              type="text"
-              placeholder="Firstname"
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-              className="border p-2 rounded w-full mb-4"
-            />
-            <input
-              type="text"
-              placeholder="Lastname"
-              value={lastname}
-              onChange={(e) => setLastName(e.target.value)}
-              className="border p-2 rounded w-full mb-4"
-            />
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="border p-2 rounded w-full mb-4"
-            />
-            <input
-              type="date"
-              placeholder="Date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="border p-2 rounded w-full mb-4"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="border p-2 rounded w-full mb-4"
-            />
-            {editingUser ? (
+          <div className="rounded-[10px] shadow-xs mb-2">
+            <div className="flex gap-[20px] p-[10px]">
+              <input
+                type="text"
+                placeholder="Firstname"
+                value={firstname}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="border p-2 rounded w-full mb-4"
+              />
+              <input
+                type="text"
+                placeholder="Lastname"
+                value={lastname}
+                onChange={(e) => setLastName(e.target.value)}
+                className="border p-2 rounded w-full mb-4"
+              />
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="border p-2 rounded w-full mb-4"
+              />
+              <input
+                type="date"
+                placeholder="Date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="border p-2 rounded w-full mb-4"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border p-2 rounded w-full mb-4"
+              />
+              {editingUser ? (
+                <button
+                  onClick={updateUser}
+                  className="bg-yellow-500 text-white px-4 h-[45px] rounded hover:bg-yellow-600 cursor-pointer shadow-md"
+                >
+                  <IoSaveSharp className="w-fit h-fit" />
+                  {}
+                </button>
+              ) : (
+                <button
+                  onClick={addUser}
+                  className="w-fit h-fit bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center justify-center cursor-pointer shadow-md"
+                >
+                  <IoAddCircleSharp className="w-5 h-5" /> {}
+                </button>
+              )}
+            </div>
+            <div className="flex gap-[20px] p-[10px]">
+              <input
+                type="text"
+                placeholder="Search Users"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="border p-2 rounded w-full mb-4"
+              />
               <button
-                onClick={updateUser}
-                className="bg-yellow-500 text-white px-4 h-[45px] rounded hover:bg-yellow-600 cursor-pointer"
+                onClick={() => setSearchTerm(searchTerm)}
+                className="w-fit h-fit bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer shadow-md"
               >
-                <IoSaveSharp className="w-fit h-fit bg" />
+                <FaSearch className="w-5 h-5 bg" />
                 {}
               </button>
-            ) : (
-              <button
-                onClick={addUser}
-                className="w-fit h-fit bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center justify-center cursor-pointer"
-              >
-                <IoAddCircleSharp className="w-5 h-5 bg" /> {}
-              </button>
-            )}
-          </div>
-          <div className="flex gap-[20px] p-[10px]">
-            <input
-              type="text"
-              placeholder="Search Users"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="border p-2 rounded w-full mb-4"
-            />
-            <button
-              onClick={() => setSearchTerm(searchTerm)}
-              className="w-fit h-fit bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
-            >
-              <FaSearch className="w-5 h-5 bg" />
-              {}
-            </button>
+            </div>
           </div>
           <div className="w-full h-fit justify-center text-center items-center">
             <h2 className="text-xl font-bold mb-4">Users Table</h2>
@@ -326,21 +336,21 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                         setFirstName(user.firstname);
                         setLastName(user.lastname);
                       }}
-                      className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 cursor-pointer"
+                      className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 cursor-pointer shadow-md"
                     >
                       <FiEdit className="w-5 h-5 bg" />
                       {}
                     </button>
                     <button
                       onClick={() => deleteUser(user.username)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 cursor-pointer"
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 cursor-pointer shadow-md"
                     >
                       <MdDelete className="w-5 h-5 bg" />
                       {}
                     </button>
                     <button
-                      onClick={() => viewDetails}
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 cursor-pointer"
+                      onClick={() => viewDetails(user)}
+                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 cursor-pointer shadow-md"
                     >
                       <FaEye className="w-5 h-5 bg" />
                       {}

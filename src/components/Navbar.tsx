@@ -33,7 +33,7 @@ function Navbar() {
             alt="Landing Page Illustration"
             className="w-[30px] h-[30px] animate-fade-in rounded-full shadow-md items-center border cursor-pointer"
           />
-          Hello, <span className="font-semibold cursor-pointer">{username}</span>
+          Hello, <span className="font-semibold cursor-pointer ">{username}!</span>
         </div>
       )}
     </div>
