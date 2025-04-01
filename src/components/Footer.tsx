@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="w-full h-fit bg-gray-900 text-white py-1">
+    <footer className="w-full h-fit bg-[#2469c3]  text-white py-1">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
         {/* Left Side - Contact Info */}
         <div className="text-center md:text-left">
@@ -21,7 +21,7 @@ function Footer() {
             href="https://github.com/lightdarkmaster"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-400 hover:underline"
+            className="text-white hover:underline"
           >
             GitHub: lightdarkmaster
           </a>
@@ -29,7 +29,7 @@ function Footer() {
             href="https://www.facebook.com/ChanNotDiff/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-400 hover:underline"
+            className="text-white hover:underline"
           >
             Facebook: Christian Barbosa
           </a>

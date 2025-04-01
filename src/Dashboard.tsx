@@ -29,8 +29,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [isLastnameAsc, setIsLastnameAsc] = useState(true);
   const [isDateAsc, setIsDateAsc] = useState(true);
   const navigate = useNavigate();
-  // const [originalUsers] = useState([...users]); // Store original order
-  // const [isSorted, setIsSorted] = useState(false);
+
 
   const togglePasswordVisibility = (username: string) => {
     setShowPasswords((prev) => ({
