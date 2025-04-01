@@ -45,7 +45,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     const now = new Date();
     const formattedDate = now.toISOString().split("T")[0];
     const formattedTime = now.toLocaleTimeString("en-US", { hour12: false });
-    const timestamp = `${formattedDate} ${formattedTime}`; // Store both date and time
+    const timestamp = `${formattedDate} ${formattedTime}`;
 
     if (!username || !password || !firstname || !lastname) {
       Swal.fire(
