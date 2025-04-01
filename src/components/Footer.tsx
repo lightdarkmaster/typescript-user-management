@@ -11,7 +11,7 @@ function Footer() {
 
 
         <div className="text-center mt-4 md:mt-0">
-          <p>&copy; {new Date().getFullYear()} Christian Barbosa. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Christian Barbosa. All Rights Reserved.</p>  
         </div>
 
 
