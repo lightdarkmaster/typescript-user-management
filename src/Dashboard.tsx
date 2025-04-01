@@ -11,6 +11,7 @@ import { IoSaveSharp } from "react-icons/io5";
 import { FaSort } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import Footer from "./components/Footer";
 
 const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [username, setUsername] = useState("");
@@ -330,6 +331,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
           </table>
         </div>
       </div>
+    <Footer/>
     </div>
   );
 };

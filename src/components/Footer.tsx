@@ -1,10 +1,42 @@
-
 function Footer() {
   return (
-    <div className="w-full h-fit bg-red-600">
-<h1>Footer</h1>
-    </div>
-  )
+    <footer className="w-full h-fit bg-gray-900 text-white py-1">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+        {/* Left Side - Contact Info */}
+        <div className="text-center md:text-left">
+          <h2 className="text-xl font-semibold">Contact Me</h2>
+          <p>Email: christian.barbosa05222001@gmail.com</p>
+          <p>Phone: +123 456 78910</p>
+        </div>
+
+
+        <div className="text-center mt-4 md:mt-0">
+          <p>&copy; {new Date().getFullYear()} Christian Barbosa. All Rights Reserved.</p>
+        </div>
+
+
+        <div className="text-center mt-4 md:mt-0 flex flex-col">
+          <h2 className="text-xl font-semibold">Follow Me</h2>
+          <a
+            href="https://github.com/lightdarkmaster"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:underline"
+          >
+            GitHub: lightdarkmaster
+          </a>
+          <a
+            href="https://www.facebook.com/ChanNotDiff/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:underline"
+          >
+            Facebook: Christian Barbosa
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
 }
 
-export default Footer
+export default Footer;
