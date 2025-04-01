@@ -31,6 +31,11 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
   const [isLastnameAsc, setIsLastnameAsc] = useState(true);
   const [isDateAsc, setIsDateAsc] = useState(true);
   const navigate = useNavigate();
+  const [showPass, setShowPass] = useState(false);
+
+  const showPassword = () => {
+    setShowPass(!showPass);
+  };
 
   const togglePasswordVisibility = (username: string) => {
     setShowPasswords((prev) => ({
@@ -59,17 +64,50 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
       setPassword("");
       setFirstName("");
       setLastName("");
-      Swal.fire("Success", "User added successfully", "success");
+      Swal.fire({
+        title: "Success!",
+        text: "User added successfully!",
+        imageUrl: "/images/good-job.gif",
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
     }
   };
 
   const deleteUser = (username: string) => {
-    setUsers(users.filter((user) => user.username !== username));
-    Swal.fire("Deleted", "User has been removed", "success");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setUsers(users.filter((user) => user.username !== username));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
-  const viewDetails = (user: { username: string; firstname: string; lastname: string; date: string; password: string }) => {
+  const viewDetails = (user: {
+    username: string;
+    firstname: string;
+    lastname: string;
+    date: string;
+    password: string;
+  }) => {
     Swal.fire({
+      imageUrl: "/images/user.gif",
+      imageWidth: 300,
+      imageHeight: 200,
+      imageAlt: "Custom image",
       title: `<strong>User Details</strong>`,
       html: `
         <p><b>Username:</b> ${user.username}</p>
@@ -78,15 +116,13 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
         <p><b>Date:</b> ${user.date}</p>
         <p><b>Password:</b> ${user.password}</p>
       `,
-      icon: "info",
-      confirmButtonText: "Close"
+      confirmButtonText: "Close",
     });
   };
-  
 
   const updateUser = () => {
     if (!username || !password || !firstname || !lastname || !date) {
-      Swal.fire("Error", "Please enter a new username and password", "error");
+      Swal.fire("Error", "All fields are required", "error");
       return;
     }
 
@@ -103,16 +139,17 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
     setFirstName("");
     setLastName("");
     setDate("");
-    Swal.fire("Updated", "User information updated", "success");
+
+    Swal.fire("Updated", "User information updated successfully", "success");
   };
 
-  const filteredUsers = users.filter((user) =>
-    user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.date.includes(searchTerm)
+  const filteredUsers = users.filter(
+    (user) =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.date.includes(searchTerm)
   );
-  
 
   const usernameSort = () => {
     const sortedUsers = [...users].sort((a, b) =>
@@ -215,13 +252,30 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
                 onChange={(e) => setDate(e.target.value)}
                 className="border p-2 rounded w-full mb-4"
               />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border p-2 rounded w-full mb-4"
-              />
+              <div className="w-full h-full relative">
+                {showPass ? (
+                  <IoMdEye
+                    className="absolute text-[25px] top-[11px] transform right-[10px] cursor-pointer"
+                    onClick={() => {
+                      showPassword();
+                    }}
+                  />
+                ) : (
+                  <IoIosEyeOff
+                    className="absolute text-[25px] top-[11px] transform right-[10px] cursor-pointer"
+                    onClick={() => {
+                      showPassword();
+                    }}
+                  />
+                )}
+                <input
+                  type={showPass ? 'text' : 'password'}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className=" min-w-[150px] border p-2 rounded w-full mb-4 pr-[40px]"
+                />
+              </div>
               {editingUser ? (
                 <button
                   onClick={updateUser}
@@ -259,7 +313,7 @@ const Dashboard: React.FC<Properties> = ({ users, setUsers }) => {
           <div className="w-full h-fit justify-center text-center items-center">
             <h2 className="text-xl font-bold mb-4">Users Table</h2>
           </div>
-          <table className="w-full border-collapse border text-left">
+          <table className="w-full h-fit border-collapse border text-left">
             <thead>
               <tr className="bg-gray-200">
                 <th className="border px-4 py-2 text-center">
