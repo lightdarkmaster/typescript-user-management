@@ -2,6 +2,9 @@
 export interface User {
     username: string;
     password: string;
+    firstname: string;
+    lastname: string;
+    date: string;
   }
   
   export interface Properties {
