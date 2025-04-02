@@ -1,5 +1,13 @@
 # React + TypeScript + Vite
-
+<div style="display: flex; justify-content: center; gap: 20px;">
+   <img src="screenshots/Screenshot 2025-04-02 075255.png" alt="landing_page" width="200px">
+   <img src="screenshots/Screenshot 2025-04-02 075318.png" alt="Sign In Page" width="200px">
+   <img src="screenshots/Screenshot 2025-04-02 075304.png" alt="Sign Up Page" width="200px">
+   <img src="screenshots/Screenshot 2025-04-02 075356.png" alt="Dashboard" width="200px">
+   <img src="screenshots/Screenshot 2025-04-02 075420.png" alt="Homepage" width="200px">
+   <img src="screenshots/Screenshot 2025-04-02 075409.png" alt="View Profile Modal" width="200px">
+   <img src="screenshots/Screenshot 2025-04-01 214508.png" alt="Dashboard" width="200px">
+</div>
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
